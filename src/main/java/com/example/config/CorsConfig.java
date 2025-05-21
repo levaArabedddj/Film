@@ -14,7 +14,8 @@ public class CorsConfig {
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
                         .allowedOrigins(
-                                "http://192.168.1.15:8080",  // IP твоего ноутбука
+                                "https://mellow-dolphin-38542e.netlify.app",
+                                "http://192.168.1.15:8080",  
                                 "http://localhost:8080",
                                 "http://10.0.2.2:8080"  // Для эмулятора Android Studio
                         )
