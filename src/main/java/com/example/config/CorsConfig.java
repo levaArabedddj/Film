@@ -19,7 +19,7 @@ public class CorsConfig {
                                 "http://localhost:8080",
                                 "http://10.0.2.2:8080"  // Для эмулятора Android Studio
                         )
-                        .allowedMethods("GET", "POST", "PUT", "DELETE")
+                       .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                         .allowCredentials(true);
             }
         };
