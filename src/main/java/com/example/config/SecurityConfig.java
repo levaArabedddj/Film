@@ -221,7 +221,7 @@ public FilterRegistrationBean<CorsFilter> corsFilterRegistration() {
                 // 5) Генерировать токен из деталей
                 String token = jwtCore.generateToken(userDetails);
 
-                // (Опционально) Вытянуть Google-access-token, если нужен
+                // (Опционально) Вытянуть Google-access-token
                 OAuth2AuthenticationToken oauthToken = (OAuth2AuthenticationToken) auth;
                 OAuth2AuthorizedClient client = authorizedClientService
                         .loadAuthorizedClient(
