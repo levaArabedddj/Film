@@ -44,6 +44,8 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
 import java.io.*;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 
@@ -203,21 +205,14 @@ public class SecurityConfig {
                                 oauthToken.getName());
                 String googleAccessToken = client.getAccessToken().getTokenValue();
 
-                // Логируем сгенерированный JWT
-                log.info("Generated application JWT: {}", token);
+                // 6) Редирект на фронтенд с параметром token
+                String frontendRedirect = "https://mellow-dolphin-38542e.netlify.app/oauth2/callback"
+                        + "?token=" + URLEncoder.encode(token, StandardCharsets.UTF_8);
+                // Если хотите также передать googleAccessToken, можно добавить &gat=...
+                // + "&gat=" + URLEncoder.encode(googleAccessToken, StandardCharsets.UTF_8);
 
-                // Кладём JWT в заголовок ответа
-                res.setHeader(HttpHeaders.AUTHORIZATION, "Bearer " + token);
-
-                // Отдаём JSON-ответ
-                res.setStatus(HttpStatus.OK.value());
-                res.setContentType(MediaType.APPLICATION_JSON_VALUE);
-                res.getWriter().write("""
-                {
-                  "token":"%s",
-                  "google_access_token":"%s"
-                }
-                """.formatted(token, googleAccessToken));
+                // Выполнить редирект
+                getRedirectStrategy().sendRedirect(req, res, frontendRedirect);
             }
         };
     }
