@@ -208,10 +208,7 @@ public class SecurityConfig {
                 // 6) Редирект на фронтенд с параметром token
                 String frontendRedirect = "https://mellow-dolphin-38542e.netlify.app/oauth2/callback"
                         + "?token=" + URLEncoder.encode(token, StandardCharsets.UTF_8);
-                // Если хотите также передать googleAccessToken, можно добавить &gat=...
-                // + "&gat=" + URLEncoder.encode(googleAccessToken, StandardCharsets.UTF_8);
 
-                // Выполнить редирект
                 getRedirectStrategy().sendRedirect(req, res, frontendRedirect);
             }
         };
